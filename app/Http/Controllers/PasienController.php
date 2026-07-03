@@ -68,13 +68,13 @@ class PasienController extends Controller
 
                 }
 
-            }
+                else
+                {
+                    toastr()->error('Gagal Menyimpan Data Pasien');
 
-            else
-            {
-                toastr()->error('Gagal Menyimpan Data Pasien');
+                    return back();
+                }
 
-                return back();
             }
 
 

@@ -5,7 +5,7 @@ use App\Http\Controllers\PasienController;
 use App\Http\Controllers\GejalaController;
 use App\Http\Controllers\PenyakitController;
 use App\Http\Controllers\SolusiController;
-
+use App\Http\Controllers\HasilPakarController;
 
 
 Auth::routes();
@@ -36,4 +36,8 @@ Route::group([
                 Route::get('solusi',[SolusiController::class,'index'])->name('index');
                 Route::post('store/solusi',[SolusiController::class,'store'])->name('store');
                 Route::post('update/{id}solusi',[SolusiController::class,'update'])->name('update');
+
+
+                Route::get('laporan',[HasilPakarController::class,'indexLaporan'])->name('index');
+
 });

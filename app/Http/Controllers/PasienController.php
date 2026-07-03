@@ -28,34 +28,48 @@ class PasienController extends Controller
         }
         else
         {
-            $user                       = new User();
-            $user->id_role              = 3;
-            $user->nama                 = $request->nama;
-            $user->email                = $request->email;
-            $user->username             = $request->nik;
-            $user->password             = bcrypt($request->password);
-            $user->status               = 1;
-            if($user->save())
-            {
-                $pasien                     = new Pasien();
-                $pasien->id_user            = $user->id;
-                $pasien->nama_lengkap       = $request->nama;
-                $pasien->nik                = $request->nik;
-                $pasien->handphone          = $request->hp;
-                $pasien->jenis_kelamin      = $request->jeniskelamin;
-                $pasien->tempat_lahir       = $request->tempatlahir;
-                $pasien->tanggal_lahir      = date('Y-m-d', strtotime($request->tanggallahir));
-                $pasien->alamat_ktp         = $request->alamat;
-                $pasien->agama              = $request->agama;
-                $pasien->pekerjaan          = $request->pekerjaan;
-                $pasien->status_pernikahan  = $request->menikah;
-                $pasien->save();
+            $cuser                      = User::where('email', $request->email)
+                                                ->first();
 
-                toastr()->success('Berhasil Menyimpan Data Pasien');
+            if($cuser)
+            {
+                toastr()->error('Email sudah terdaftar');
 
                 return back();
+            }
+            else
+            {
+                $user                       = new User();
+                $user->id_role              = 3;
+                $user->nama                 = $request->nama;
+                $user->email                = $request->email;
+                $user->username             = $request->nik;
+                $user->password             = bcrypt($request->password);
+                $user->status               = 1;
+                if($user->save())
+                {
+                    $pasien                     = new Pasien();
+                    $pasien->id_user            = $user->id;
+                    $pasien->nama_lengkap       = $request->nama;
+                    $pasien->nik                = $request->nik;
+                    $pasien->handphone          = $request->hp;
+                    $pasien->jenis_kelamin      = $request->jeniskelamin;
+                    $pasien->tempat_lahir       = $request->tempatlahir;
+                    $pasien->tanggal_lahir      = date('Y-m-d', strtotime($request->tanggallahir));
+                    $pasien->alamat_ktp         = $request->alamat;
+                    $pasien->agama              = $request->agama;
+                    $pasien->pekerjaan          = $request->pekerjaan;
+                    $pasien->status_pernikahan  = $request->menikah;
+                    $pasien->save();
+
+                    toastr()->success('Berhasil Menyimpan Data Pasien');
+
+                    return back();
+
+                }
 
             }
+
             else
             {
                 toastr()->error('Gagal Menyimpan Data Pasien');

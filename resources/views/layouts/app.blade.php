@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="/assets/bower_components/bootstrap-daterangepicker/daterangepicker.css">
     <link rel="stylesheet" href="/assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
     <link href="/assets/css/toastr.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/plugins/iCheck/all.css">
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
@@ -53,21 +54,27 @@
     <script src="/assets/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
     <script type="text/javascript" src="/assets/css/toastr.min.js"></script>
     <script src="/assets/plugins/datapicker/bootstrap-datepicker.js"></script>
+    <script src="/assets/plugins/iCheck/icheck.min.js"></script>
+
     <script>
         $('.dataTab').dataTable();
         $(".select2").select2();
         $('.daterange').daterangepicker();
 
-       $('.maxdate').datepicker({
+        $('.maxdate').datepicker({
             todayHighlight: true,
             autoclose: true,
             format: 'dd-mm-yyyy',
             language: 'id',
             endDate: '0d'
         });
+
+        $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+          checkboxClass: 'icheckbox_flat-green',
+          radioClass   : 'iradio_flat-green'
+        });
+        
     </script>
-
-
+    @yield('kmeans')
 </body>
-
 </html>

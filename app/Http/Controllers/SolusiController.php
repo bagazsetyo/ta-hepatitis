@@ -25,6 +25,7 @@ public function index()
     {
         $solusi                             = new Solusi();
         $solusi->id_penyakit                = $request->penyakit;
+        $solusi->kode                       = rand(0, 9999999);
         $solusi->deskripsi                  = $request->deskripsi;
         $solusi->save();
 

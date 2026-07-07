@@ -15,7 +15,7 @@ return new class extends Migration
             $table->increments('id')->unsigned();
             $table->string('kode');
             $table->string('penyakit');
-            $table->text('keterangan');
+            $table->text('keterangan')->nullable();
             $table->timestamps();
         });
     }

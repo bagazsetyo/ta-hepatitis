@@ -37,7 +37,9 @@ Route::group([
                 Route::post('store/solusi',[SolusiController::class,'store'])->name('store');
                 Route::post('update/{id}solusi',[SolusiController::class,'update'])->name('update');
 
-
+                Route::get('diagnosis',[HasilPakarController::class,'index'])->name('index');
+                Route::post('diagnosis/proses',[HasilPakarController::class,'proses'])->name('proses');
+                Route::get('diagnosis/show{id}',[HasilPakarController::class,'show'])->name('proses');
                 Route::get('laporan',[HasilPakarController::class,'indexLaporan'])->name('index');
 
 });

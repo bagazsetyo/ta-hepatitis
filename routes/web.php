@@ -16,6 +16,7 @@ Route::group([
                 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
                 Route::get('pasien',[PasienController::class,'index'])->name('index');
+                Route::get('detail/{id}pasien',[PasienController::class,'show'])->name('show');
                 Route::post('store/pasien',[PasienController::class,'store'])->name('store');
                 Route::post('update/{id}pasien',[PasienController::class,'update'])->name('update');
 

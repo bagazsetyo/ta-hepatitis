@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Pasien;
 use App\Models\User;
+use App\Models\HasilPakar;
+use App\Models\PivotHasilPakar;
 
 class PasienController extends Controller
 {
@@ -126,5 +128,14 @@ class PasienController extends Controller
 
 
         }
+    }
+
+    public function show($id)
+    {
+        $pasien                                 = Pasien::find($id);
+        $diagnosa                               = HasilPakar::where('id_pasien', $id)->get();
+        
+
+        return view('pasien.show', compact('pasien','diagnosa'));
     }
 }

@@ -36,9 +36,12 @@
                                 <td>{{$items->handphone}}</td>
                                 <td>
                                     <div class="hidden-sm hidden-xs action-buttons">
-                                        <a class="green" href="#" data-toggle="modal" data-target="#edit{{$items->id}}">
+                                        <a class="btn btn-xs btn-warning" href="#" data-toggle="modal" data-target="#edit{{$items->id}}">
                                             <i class="ace-icon fa fa-pencil bigger-130"></i>
                                         </a>
+                                        <a href="/detail/{{$items->id}}pasien" class="btn btn-xs btn-primary">
+                                         <i class="ace-icon fa fa-eye bigger-130"></i>
+                                    </a>
                                     </div>
                                 </td>
                             </tr>

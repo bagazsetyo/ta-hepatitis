@@ -16,7 +16,7 @@ class HasilPakarController extends Controller
 
     public function index()
     {
-        $gejalas                = Gejala::orderBy('gejala','asc')->get();
+        $gejalas                = Gejala::orderBy('kode','asc')->get();
         $pasien                 = Pasien::all();
 
 

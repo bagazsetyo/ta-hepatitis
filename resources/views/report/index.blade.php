@@ -52,7 +52,8 @@
                         K-MEANS PASIEN BERDASARKAN GEJALA
                     </label>
                     <hr>
-                    <table class="table table-bordered table-hover">
+                    <div style="overflow-x:auto;">
+                    <table class="table table-bordered table-striped table-hover" >
                         <tr>
                             <th>No</th>
                             <th>Nama Pasien</th>
@@ -82,6 +83,7 @@
                         </tr>
                         @endforeach
                     </table>
+                    </div>
             </div>
         </div>
     </div>

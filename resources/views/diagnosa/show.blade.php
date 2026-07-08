@@ -62,57 +62,28 @@
                         <span><center>HASIL DIAGNOSIS</center></span>
                         <hr>
                         
-                        <div class="col-md-6">
-                                    @foreach($penyakit as $no=>$item )
-                              
-                                        @php
-                                            $nilai          = 0;
-                                            $totpersen      = 0;
-
-                                        @endphp
-                                        @foreach($phpakar as $no=>$val )
-                                            @if($item->id==$val->idpenyakit)
-                                                @php
-                                                    $nilai          +=$val->nilai;
-                                                    $totpersen      = $nilai/$totdata*(100);
-                                                    $penyakit       = $item->penyakit;
-                                                    $kode           = $item->kode;
-                                                    $solusi         = $item->deskripsi;
-                                                @endphp
-                                            @endif
-
-                                        @endforeach
-                       
-                                @endforeach
-                                @if($totpersen!=100)
-                               
-                                    <div class="widget-user-header bg-red">
-                                        <center>
-                                            <h2 class="widget-user-username">PENYAKIT TIDAK DITEMUKAN</h2>
-                                        </center>
-                                    </div>
-                                @else
-                                @endif
-                                @if($totpersen>=80)
-                                <label>
-                                     <div class="widget-user-header bg-info">
-                                        <center>
-                                            <h2 class="widget-user-username">JENIS PENYAKIT DENGAN GEJALA TERKAIT</h2>
-                                        </center>
-                                    </div>
-                               
-                                </label>
-                                <div class="widget-user-header bg-blue">
+                        <div class="col-md-6">    
+                                          
+                            <label>
+                                 <div class="widget-user-header bg-info">
                                     <center>
-                                    <div class="widget-user-image">
-                                        <img class="img-circle" src="/assets/img/logo.png" width="20%" alt="User Avatar">
-                                    </div>
-                                        <h2 class="widget-user-username">Memiliki Nilai {{$totpersen}} %</h2> 
-                                        <h3 class="widget-user-desc">{{$kode}} - {{$penyakit}} </h3><br>
-                                        <span>{{$solusi}}</span>
+                                        <h2 class="widget-user-username">JENIS PENYAKIT DENGAN GEJALA TERKAIT</h2>
                                     </center>
                                 </div>
-                                @endif
+                           
+                            </label>
+                            <div class="widget-user-header bg-blue">
+                                <center>
+                                <div class="widget-user-image">
+                                    <img class="img-circle" src="/assets/img/logo.png" width="20%" alt="User Avatar">
+                                </div>
+                                    <h2 class="widget-user-username">Memiliki Nilai {{$pakar->nilai}} %</h2> 
+                                    <h3 class="widget-user-desc">{{$penyakit->kode}} - {{$penyakit->penyakit}} </h3><br>
+                                    <span>{{$penyakit->solusi}}</span>
+                                </center>
+                            </div>
+                          
+                                    
 
                         </div>
                         <div class="col-md-6">

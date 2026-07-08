@@ -40,8 +40,8 @@
                                             <i class="ace-icon fa fa-pencil bigger-130"></i>
                                         </a>
                                         <a href="/detail/{{$items->id}}pasien" class="btn btn-xs btn-primary">
-                                         <i class="ace-icon fa fa-eye bigger-130"></i>
-                                    </a>
+                                            <i class="ace-icon fa fa-eye bigger-130"></i>
+                                        </a>
                                     </div>
                                 </td>
                             </tr>

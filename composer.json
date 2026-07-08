@@ -11,6 +11,7 @@
         "laravel/tinker": "^2.10.1",
         "laravel/ui": "^4.6",
         "php-ai/php-ml": "^0.10.0",
+        "rubix/ml": "^2.5",
         "yoeunes/toastr": "^3.3"
     },
     "require-dev": {

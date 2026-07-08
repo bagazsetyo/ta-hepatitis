@@ -9,7 +9,7 @@ use App\Models\Gejala;
 use App\Models\Pasien;
 use App\Models\Penyakit;
 use App\Models\PivotPenyakit;
-use Rubix\ML\Clusterers\KMeans;
+use App\Services\KMeansService;
 
 class HasilPakarController extends Controller
 {
@@ -38,7 +38,7 @@ class HasilPakarController extends Controller
                                                     ->select(\DB::raw('sum(nilai) as nilai'))
                                                     ->first();
 
-        $totnilai                   = number_format(($hasilDiagnosa->nilai/$penyakit->nilai)*100,2);
+        $totnilai                   = number_format(($hasilDiagnosa->nilai/$penyakit->nilai)*100,0);
 
         $pakar                      = new HasilPakar();
         $pakar->id_pasien           = $request->pasien;
@@ -101,11 +101,25 @@ class HasilPakarController extends Controller
     }
 
 
+
+
     public function indexLaporan()
     {
+        
+        $pasien                         = Pasien::all();
+        $gejala                         = Gejala::orderBy('gejala','asc')->get();
 
-        $kmeans = new KMeans(3);
+        $clusterpenyakit                = HasilPakar::select('hasil_pakars.id_pasien as idpasien','hasil_pakars.id_penyakit as idpenyakit')
+                                                        ->get();
 
-        return view('report.index');
+        $clustergejala                = HasilPakar::join('pivot_hasil_pakars','pivot_hasil_pakars.id_hasil','hasil_pakars.id')
+                                                        ->select('hasil_pakars.id_pasien as idpasien','pivot_hasil_pakars.id_gejala as idgejala','hasil_pakars.id_penyakit as idpenyakit')
+                                                        ->get();
+
+        $penyakit                       = Penyakit::orderBy('penyakit','asc')->get();
+
+
+        return view('report.index', compact('pasien','gejala','clusterpenyakit','penyakit','clustergejala'));
+
     }
 }

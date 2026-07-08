@@ -7,6 +7,7 @@ use App\Models\Pasien;
 use App\Models\User;
 use App\Models\HasilPakar;
 use App\Models\PivotHasilPakar;
+use DateTime;
 
 class PasienController extends Controller
 {
@@ -22,6 +23,14 @@ class PasienController extends Controller
     public function store(Request $request)
     {
         $cpasien                    = Pasien::where('nik', $request->nik)->first();
+
+
+        $tanggal_lahir      = $request->tanggallahir; 
+        $lahir              = new DateTime($tanggal_lahir);
+        $sekarang           = new DateTime("today"); // Mengambil tanggal hari ini tanpa komponen waktu
+        $umur               = $sekarang->diff($lahir);
+
+
 
         if ($cpasien) 
         {
@@ -55,6 +64,7 @@ class PasienController extends Controller
                     $pasien->nama_lengkap       = $request->nama;
                     $pasien->nik                = $request->nik;
                     $pasien->handphone          = $request->hp;
+                    $pasien->usia               = $umur->y;
                     $pasien->jenis_kelamin      = $request->jeniskelamin;
                     $pasien->tempat_lahir       = $request->tempatlahir;
                     $pasien->tanggal_lahir      = date('Y-m-d', strtotime($request->tanggallahir));

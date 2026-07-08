@@ -2,28 +2,91 @@
     @section('report', 'active')
 @section('content')
 <div class="row">
-    <section class="col-lg-7 connectedSortable">
-        <div class="nav-tabs-custom">
-           <ul class="nav nav-tabs pull-right">
-              <li class="pull-left header"><i class="fa fa-inbox"></i> Sales</li>
-            </ul>
-            <div class="tab-content no-padding">
-              <!-- Morris chart - Sales -->
-              <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px;"></div>
-              <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;"></div>
+    <div class="col-md-12">
+        <div class='box '>
+            <div class="box-header with-border">
+                <h3 class="box-title">LAPORAN</h3>
+               
+            </div>
+
+            <div class='box-body'>
+                <br>
+                    <label>
+                        K-MEANS PASIEN BERDASARKAN PENYAKIT
+                    </label>
+                    <hr>
+                    <table class="table table-bordered table-hover" style="border: 1px;">
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Pasien</th>
+                            @foreach($penyakit as $val)
+                                <th>
+                                    <center>{{$val->penyakit}}</center>
+                                </th>
+                            @endforeach
+                        </tr>
+                        @foreach($pasien as $no=>$ps)       
+                        <tr>
+                            <td>{{$no+1}}</td>
+                            <td>{{$ps->nama_lengkap}}</td>
+                            @foreach($penyakit as $val)
+                            @php 
+                                $nilai =0;
+                            @endphp
+                            <td>
+                                @foreach($clusterpenyakit as $clas)
+                                    @if($ps->id==$clas->idpasien && $clas->idpenyakit==$val->id)
+                                        @php 
+                                            $nilai =1;
+                                        @endphp
+                                    @endif
+                                @endforeach
+                                <center>{{$nilai}}</center>
+                            </td>
+                             @endforeach
+                        </tr>
+                        @endforeach
+                    </table>
+                    <hr>
+                    <label>
+                        K-MEANS PASIEN BERDASARKAN GEJALA
+                    </label>
+                    <hr>
+                    <table class="table table-bordered table-hover">
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Pasien</th>
+                            @foreach($gejala as $val)
+                                <th>{{$val->gejala}}</th>
+                            @endforeach
+                        </tr>
+                        @foreach($pasien as $no=>$ps)
+                        <tr>
+                            <td>{{$no+1}}</td>
+                            <td>{{$ps->nama_lengkap}}</td>
+                            @foreach($gejala as $val)
+                            @php 
+                                $nilai =0;
+                            @endphp
+                            <td>
+                                @foreach($clustergejala as $clas)
+                                    @if($ps->id==$clas->idpasien && $clas->idgejala==$val->id)
+                                        @php 
+                                            $nilai =1;
+                                        @endphp
+                                    @endif
+                                @endforeach
+                                <center>{{$nilai}}</center>
+                            </td>
+                             @endforeach
+                        </tr>
+                        @endforeach
+                    </table>
             </div>
         </div>
-    </section>
-    <section class="col-lg-5 connectedSortable">
-        <div class="box box-solid bg-light-blue-gradient">
-            <div class="box-header">
-                <div class="pull-right box-tools">
-            
-                </div>
-            </div>
-        </div>
-    </section>
+    </div>
 </div>
+
 
 
 @endsection

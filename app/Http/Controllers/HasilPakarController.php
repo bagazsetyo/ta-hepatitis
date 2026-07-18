@@ -118,8 +118,37 @@ class HasilPakarController extends Controller
 
         $penyakit                       = Penyakit::orderBy('penyakit','asc')->get();
 
+        $diagnosisPasien                = HasilPakar::join('penyakits','penyakits.id','hasil_pakars.id_penyakit')
+                                                        ->select('hasil_pakars.id_pasien as idpasien','penyakits.penyakit')
+                                                        ->get();
 
-        return view('report.index', compact('pasien','gejala','clusterpenyakit','penyakit','clustergejala'));
+        $kmeans                         = (new KMeansService())->clusterPatients(
+                                                        $pasien,
+                                                        $gejala,
+                                                        $clustergejala,
+                                                        $diagnosisPasien,
+                                                        5
+                                                    );
+
+        $kmeansCharts                   = [
+                                                        'cluster_labels' => array_map(function ($cluster) {
+                                                            return 'Cluster '.$cluster['cluster'];
+                                                        }, $kmeans['clusters']),
+                                                        'cluster_counts' => array_map(function ($cluster) {
+                                                            return $cluster['member_count'];
+                                                        }, $kmeans['clusters']),
+                                                        'diagnosis_labels' => [],
+                                                        'diagnosis_counts' => [],
+                                                    ];
+
+        foreach ($kmeans['clusters'] as $cluster) {
+            foreach ($cluster['diagnosis_distribution'] as $diagnosis => $jumlah) {
+                $kmeansCharts['diagnosis_labels'][] = 'C'.$cluster['cluster'].' - '.$diagnosis;
+                $kmeansCharts['diagnosis_counts'][] = $jumlah;
+            }
+        }
+
+        return view('report.index', compact('pasien','gejala','clusterpenyakit','penyakit','clustergejala','kmeans','kmeansCharts'));
 
     }
 }

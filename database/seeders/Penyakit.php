@@ -19,6 +19,7 @@ class Penyakit extends Seeder
             ['kode' => 'P02', 'penyakit' => 'Hepatitis B'],
             ['kode' => 'P03', 'penyakit' => 'Hepatitis C'],
             ['kode' => 'P04', 'penyakit' => 'Hepatitis D'],
+            ['kode' => 'P05', 'penyakit' => 'Hepatitis E'],
         ]);
     }
 }

@@ -9,6 +9,7 @@ use App\Models\Gejala;
 use App\Models\Pasien;
 use App\Models\Penyakit;
 use App\Models\PivotPenyakit;
+use App\Services\DiagnosisProofService;
 use App\Services\KMeansService;
 
 class HasilPakarController extends Controller
@@ -150,5 +151,12 @@ class HasilPakarController extends Controller
 
         return view('report.index', compact('pasien','gejala','clusterpenyakit','penyakit','clustergejala','kmeans','kmeansCharts'));
 
+    }
+
+    public function pembuktian()
+    {
+        $proof = (new DiagnosisProofService())->buildProof();
+
+        return view('report.pembuktian', compact('proof'));
     }
 }

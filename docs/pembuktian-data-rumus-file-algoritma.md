@@ -392,10 +392,45 @@ Output yang tampil:
 - Matriks diagnosis hasil Forward Chaining.
 - Tabel iterasi K-Means.
 
+## 5.1 Output Bukti Konsistensi Forward Chaining
+
+Halaman pembuktian logic:
+
+- URL aplikasi: `/laporan/pembuktian`
+- Route: `Route::get('laporan/pembuktian',[HasilPakarController::class,'pembuktian'])`
+- File view: `init/resources/views/report/pembuktian.blade.php`
+- File service: `init/app/Services/DiagnosisProofService.php`
+
+Halaman ini tidak menambah, mengubah, atau menghapus data database. Sistem hanya membaca data hasil diagnosis yang sudah tersimpan, mengambil gejala pada setiap kasus, lalu menghitung ulang diagnosis dengan rule yang ada pada tabel `pivot_penyakits`.
+
+Output yang tampil:
+
+- Total kasus yang diuji.
+- Jumlah kasus sesuai.
+- Jumlah kasus tidak sesuai.
+- Akurasi konsistensi logic.
+- Chart hasil pembuktian.
+- Kelengkapan jumlah rule penyakit-gejala.
+- Tabel diagnosis tersimpan vs diagnosis hitung ulang.
+- Ranking kandidat penyakit per kasus.
+
+Makna pembuktian:
+
+```text
+Jika diagnosis tersimpan sama dengan diagnosis hitung ulang, berarti logic Forward Chaining konsisten terhadap data gejala dan rule penyakit-gejala yang ada saat ini.
+```
+
+Catatan batasan:
+
+```text
+Pembuktian ini menguji konsistensi logic sistem, bukan validasi medis final. Validasi medis tetap perlu dilakukan dengan pakar/dokter.
+```
+
 ## 6. Screenshot yang Perlu Masuk BAB IV
 
 Screenshot yang disarankan:
 
+- Halaman pembuktian logic Forward Chaining.
 - Tampilan ringkasan metrik K-Means.
 - Chart jumlah pasien per cluster.
 - Chart distribusi diagnosis per cluster.
@@ -411,4 +446,3 @@ Kalimat kesimpulan yang aman:
 ```text
 Berdasarkan implementasi pada aplikasi, metode Forward Chaining digunakan untuk menghasilkan diagnosis hepatitis berdasarkan aturan gejala-penyakit. Sementara itu, K-Means digunakan untuk mengelompokkan data pasien berdasarkan kemiripan pola gejala. Bukti penerapan K-Means ditunjukkan melalui matriks gejala 0/1, hasil cluster, grafik distribusi cluster, tabel iterasi, Silhouette Score, dan Davies-Bouldin Index pada halaman laporan.
 ```
-

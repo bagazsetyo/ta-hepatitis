@@ -42,5 +42,6 @@ Route::group([
                 Route::post('diagnosis/proses',[HasilPakarController::class,'proses'])->name('proses');
                 Route::get('diagnosis/show{id}',[HasilPakarController::class,'show'])->name('proses');
                 Route::get('laporan',[HasilPakarController::class,'indexLaporan'])->name('index');
+                Route::get('laporan/pembuktian',[HasilPakarController::class,'pembuktian'])->name('pembuktian');
 
 });
